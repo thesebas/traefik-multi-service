@@ -1,6 +1,6 @@
 # Multi service with traefik
 
-# Instalation:
+# Installation
 to run execute:
 
     docker compose run composer install
