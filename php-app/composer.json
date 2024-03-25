@@ -1,0 +1,19 @@
+{
+    "name": "thesebas/php-app",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Thesebas\\PhpApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "thesebas",
+            "email": "thesebas@thesebas.net"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.13",
+        "guzzlehttp/psr7": "^2.6"
+    }
+}
