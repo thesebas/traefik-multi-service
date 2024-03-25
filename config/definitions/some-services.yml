@@ -1,0 +1,38 @@
+
+http:
+  routers:
+    dashboard:
+      rule: PathPrefix(`/api`, `/dashboard`)
+      service: api@internal
+
+
+    php:
+      rule: PathPrefix(`/php`)
+      middlewares: strip-prefix
+      service: php
+
+     
+    node-express:
+      rule: PathPrefix(`/node`)
+      middlewares: strip-prefix
+      service: node-express
+
+  services:
+    php:
+      loadbalancer:
+        servers:
+          - url: "http://php:8080/"
+
+
+    node-express:
+      loadbalancer:
+        servers:
+          - url: "http://node-express:3000/"
+            
+  middlewares:
+    strip-prefix:
+      stripprefix:
+        prefixes: 
+          - /php
+          - /node
+        forceSlash: true

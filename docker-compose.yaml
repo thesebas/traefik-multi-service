@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.11
+    command:
+
+
+    ports:
+      - 8888:80
+      - 8889:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yml:/etc/traefik/traefik.yml
+      - ./config/definitions:/etc/traefik/dyn/
+
+
+  php:
+    image: php:8.2-cli
+    volumes:
+      - ./php-app:/var/www/html
+    command: php -S 0.0.0.0:8080 -t /var/www/html
+
+  node-express:
+    image: node:21-alpine
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./node-app:/home/node/app:ro
+    command: npm start
